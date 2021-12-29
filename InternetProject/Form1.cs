@@ -29,6 +29,8 @@ namespace InternetProject
         string password = "DbnczQ9NC224";
         int port = 15591;
         string myString = "string";
+        private int raveIntervals = 2;
+        private Timer timer;
         public Form1()
         {
             InitializeComponent();
@@ -151,5 +153,29 @@ namespace InternetProject
             Task Pub = PublishAsync("Grupp4OUT", tbxPublish.Text, true, 1);
             //RecieveHandler();
         }
+
+        private void StartRave()
+        {
+            timer = new Timer();
+            //1 sekund
+            timer.Interval = (1000);
+            timer.Tick += new EventHandler(Rave);
+            timer.Start();
+        }
+
+        private void StopRave()
+        {
+            timer.Stop();
+        }
+
+
+        private void Rave(object sender, EventArgs e)
+        {
+            Task Pub = PublishAsync("Grupp4OUT", tbxPublish.Text, true, 1);
+        }
+
+
+
+
     }
 }
